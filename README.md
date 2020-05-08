@@ -1,3 +1,25 @@
+# React Movie Challenge
+
+A web app that helps users explore the The Movie Database API.
+
+### Pages
+
+1. Home page with popular movies /page
+1. Movie Description /movies
+1. Search Results /search
+
+### Components
+
+1. Popular List
+1. Movie Description
+1. Search Results
+1. Search bar
+1. Pagination Handler
+1. Thumbnails for lists
+
+Required environment variable: `REACT_APP_API_KEY` with an API key for [TMDb](https://developers.themoviedb.org/3/getting-started/authentication)
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
