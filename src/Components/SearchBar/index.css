@@ -1,0 +1,10 @@
+.searchBar input {
+  border: none;
+  padding: 0.8em;
+  margin: 0.2em;
+  border-radius: 3px;
+}
+.searchBar input[type=submit] {
+  padding: 0.7em;
+  border-radius: 50%;
+}

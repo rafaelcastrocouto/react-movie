@@ -1,57 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Thumb from './../Thumb';
 import Pagination from './../Pagination';
+import {useParams} from "react-router-dom";
 
-class Popular extends React.Component {
+function Popular(props) {
 
-  state = {
-    name: 'page',
-    page: 1,
-    loading: true,
-    data: []
+  const page = useParams().page || 1;
+
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  //console.log('page',page)
+  
+  useEffect(()=> {
+    async function fetchPopular () {
+      
+      const key = process.env.REACT_APP_API_KEY;
+      const url = new URL('https://api.themoviedb.org/3/movie/popular?api_key='+key+'&language=en-US&page='+page);
+
+      const res = await fetch(url);
+      const newdata = await res.json();
+
+      //console.log('Popular', newdata)
+
+      setLoading(false);
+      setData(newdata);
+
+    };
+
+    fetchPopular();
+
+  }, [page]);
+
+
+  function popularItem () {
+    if (data.results) {
+      return data.results.map(({ id, title, release_date, vote_count, popularity, backdrop_path }) => (
+        <li key={id} /*style={{backgroundImage: 'url(https://image.tmdb.org/t/p/original'+backdrop_path+')'}}*/>
+          {Thumb(id, title, release_date, vote_count, popularity)}
+        </li>
+      ))
+    }
   }
   
-  async componentDidMount() {
-    const path = window.location.pathname.split('/');
-
-    const page = path[path.length-1] ? path[path.length-1] : this.state.page;
-
-    const key = process.env.REACT_APP_API_KEY;
-
-    const url = 'https://api.themoviedb.org/3/movie/popular?api_key='+key+'&language=en-US&page='+page;
-
-    const res = await fetch(url);
-    const data = await res.json();
-
-    console.log('Popular', data)
-
-    this.setState({
-      loading: false, 
-      data: data,
-      page: page
-    });
-  }
-
-
-  popularItem() {
-    return this.state.data.results.map(({ id, title, release_date, vote_count, popularity, backdrop_path }) => (
-      <li key={id} style={{backgroundImage: 'url(https://image.tmdb.org/t/p/original'+backdrop_path+')'}}>
-        {Thumb(id, title, release_date, vote_count, popularity)}
-      </li>
-    ))
-  }
-
-  render() {
-    if (this.state.loading) return 'Loading';
-    else return (
-      <>
-        <h2>Popular</h2>  
-        {Pagination(this.state)}
-        <ul className='popular'>{this.popularItem()}</ul>
-        {Pagination(this.state)}
-      </>
-    )
-  }
+  if (loading) return 'Loading';
+  
+  return (
+    <>
+      <h2>Popular</h2>  
+      {Pagination('page', page, data.total_pages)}
+      <ul className='popular'>{popularItem.bind(this)()}</ul>
+      {Pagination('page', page, data.total_pages)}
+    </>
+  );
+  
 }
 
 export default Popular;

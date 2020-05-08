@@ -1,13 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './index.css';
 
-const Pagination = function (state) {
-  let query = '';
-  if (state.query) query = '?'+state.query;
+const Pagination = function (name, page, total, query) {
+  if (query) query = '?'+query;
+  else query = '';
   return (
     <p className='pagination'>
-      { (state.data.page !== 1) ? <a href={'/'+state.name+'/'+(state.data.page-1)+query}>Previous</a> : '' } 
-      Page {state.data.page} of {state.data.total_pages} 
-      <a href={'/'+state.name+'/'+(state.data.page+1)+query}>Next</a>
+      { (page !== 1) ? <Link to={'/'+name+'/'+(Number(page)-1)+query}>Previous</Link> : '' } 
+      Page {page} of {total} 
+      <Link to={'/'+name+'/'+(Number(page)+1)+query}>Next</Link>
     </p>
   );
 }

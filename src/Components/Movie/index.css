@@ -1,0 +1,15 @@
+.movie .details {
+  padding: 0 2em;
+  text-align: left;
+  font-size: 80%;
+}
+
+.movie .tagline {
+  margin-bottom: 2em;
+}
+
+.movie img {
+  width: 20vw;
+  float: right;
+  margin: 0 0.6em;
+}

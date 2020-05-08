@@ -1,59 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Thumb from './../Thumb';
 import Pagination from './../Pagination';
+import {useParams, useLocation} from "react-router-dom";
 
-class Search extends React.Component {
+function Search () {
 
-  state = {
-    name: 'search',
-    page: 1,
-    loading: true,
-    data: []
-  }
+  const page = useParams().page || 1;
   
-  async componentDidMount() {
-    const path = window.location.pathname.split('/');
+  const search = useLocation().search || '';
+  const params = new URLSearchParams(search);
+  const query = params.toString();
+  
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+  
+  useEffect(()=> {
+    async function fetchSearch () {
 
-    const page = path[path.length-1] ? path[path.length-1] : this.state.page;
+      const key = process.env.REACT_APP_API_KEY;
 
-    const search = window.location.search;
-    
-    let query = search.substr(1);
+      const url = new URL('https://api.themoviedb.org/3/search/movie?api_key='+key+'&page='+page+'&'+query);
 
-    const key = process.env.REACT_APP_API_KEY;
+      const res = await fetch(url);
+      const newdata = await res.json();
 
-    const url = 'https://api.themoviedb.org/3/search/movie?api_key='+key+'&'+query+'&page='+page;
+      //console.log('Search:', data);
 
-    const res = await fetch(url);
-    const data = await res.json();
+      setLoading(false);
+      setData(newdata);
+    };
 
-    this.setState({
-      loading: false,
-      query: query,
-      data: data
-    });
+    fetchSearch();
 
-    //console.log('Search:', data);
+  }, [page, query]);
+
+  function searchResults () {
+    if (data.results) {
+      return data.results.map(({ id, title, release_date, vote_count, popularity, backdrop_path }) => (
+        <li key={id} /*style={{backgroundImage: 'url(https://image.tmdb.org/t/p/original'+backdrop_path+')'}}*/>
+          {Thumb(id, title, release_date, vote_count, popularity)}
+        </li>
+      ))
+    }
   }
 
-  SearchResults () {
-    return this.state.data.results.map(({ id, title, release_date, vote_count, popularity, backdrop_path }) => (
-      <li key={id} style={{backgroundImage: 'url(https://image.tmdb.org/t/p/original'+backdrop_path+')'}}>
-        {Thumb(id, title, release_date, vote_count, popularity)}
-      </li>
-    ))
-  }
+  if (loading) return 'Loading';
 
-  render() {
-    if (this.state.loading) return 'Loading';
-    else return (
-      <>
-        {Pagination(this.state)}
-        <ul className='searchResults'>{this.SearchResults()}</ul>
-        {Pagination(this.state)}
-      </>
-    )
-  }
+  return (
+    <>
+      {Pagination('search', page, data.total_pages, query)}
+      <ul className='searchResults'>{searchResults.bind(this)()}</ul>
+      {Pagination('search', page, data.total_pages, query)}
+    </>
+  );
+
 }
 
 export default Search;

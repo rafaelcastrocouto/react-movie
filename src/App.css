@@ -15,79 +15,10 @@ h1, form {
   display: inline-block;
 }
 
-.link {
+a, a:visited, a:active {
   color: #61dafb;
 }
 
 ul {
   list-style: none;
-}
-
-.search input {
-  border: none;
-  padding: 0.8em;
-  margin: 0.2em;
-  border-radius: 3px;
-}
-.search input[type=submit] {
-  padding: 0.7em;
-  border-radius: 50%;
-}
-
-.pagination {
-  font-size: 80%;
-}
-
-.pagination a {
-  margin: 0 0.6em;
-}
-
-.popular li,
-.searchResults li {
-  width: 200px;
-  height: 200px;
-  border: 1px solid #555;
-  display: inline-block;
-  overflow: hidden;
-  margin: 0.6em;
-  background-color: #3f444e;
-  font-size: 80%;
-  border-radius: 3px;
-  background-size: 180%;
-  background-position: 50%;
-  transition: background-size 0.3s
-}
-.popular li:hover {
-  background-size: 200%;
-}
-
-.thumb {
-  background-color: rgba(0,0,0,0.7);
-  padding: 16px;
-  height: 100%;
-}
-
-.thumb .date {
-  font-size: 60%;
-}
-
-.thumb .popularity,
-.thumb .votes {
-  font-size: 90%;
-}
-
-.movie .details {
-  padding: 0 2em;
-  text-align: left;
-  font-size: 80%;
-}
-
-.movie .tagline {
-  margin-bottom: 2em;
-}
-
-.movie img {
-  width: 20vw;
-  float: right;
-  margin: 0 0.6em;
 }

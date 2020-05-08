@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './index.css';
 
 const Thumb = function (id, title, release_date, vote_count, popularity) {
   
