@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Loading from './../Loading';
 import Thumb from './../Thumb';
 import Pagination from './../Pagination';
 import {useParams} from "react-router-dom";
@@ -36,14 +37,14 @@ function Popular(props) {
   function popularItem () {
     if (data.results) {
       return data.results.map(({ id, title, release_date, vote_count, popularity, backdrop_path }) => (
-        <li key={id} /*style={{backgroundImage: 'url(https://image.tmdb.org/t/p/original'+backdrop_path+')'}}*/>
+        <li key={id}>
           {Thumb(id, title, release_date, vote_count, popularity)}
         </li>
       ))
     }
   }
   
-  if (loading) return 'Loading';
+  if (loading) return Loading();
   
   return (
     <>

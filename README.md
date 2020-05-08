@@ -1,5 +1,3 @@
-todo: hooks, sep css, links, search, loading ani
-
 # React Movie Challenge
 
 A web app that helps users explore the The Movie Database API.
