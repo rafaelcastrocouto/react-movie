@@ -7,6 +7,9 @@
   min-height: 34vw;
   background-color: #1d1f26;
 }
+.movie h1 {
+  color: #0ebeff;
+}
 
 .movie .tagline {
   margin-bottom: 2em;
@@ -20,4 +23,8 @@
 .movie .date {
   margin: 1em;
   white-space: nowrap;
+}
+
+.movie .companies {
+  text-align: left;
 }

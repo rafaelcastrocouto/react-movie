@@ -26,6 +26,8 @@ function Movie () {
 
       const res = await fetch(url);
       const newdata = await res.json();
+
+      
       
       setLoading(false);
       setData(newdata);
@@ -39,21 +41,21 @@ function Movie () {
 
   function movieDesc () {
     if(data.id) {
-
-      var { id, title, release_date, overview, vote_count, poster_path, adult, popularity, production_countries, tagline} = data;
-
       return (
         <>
-          <h1 key={id}>{title}</h1>
-          <span className="date">{release_date}</span>
-          <p className="tagline">{tagline}</p>
+          <h1 key={data.id}>{data.title}</h1>
+          <span className="date">{data.release_date}</span>
+          <p className="tagline">{data.tagline}</p>
           <div className="details">
-            <img src={'https://image.tmdb.org/t/p/original'+poster_path} alt="Movie Poster"/>
-            <p className="overview">Overview: {overview}</p>
-            <p className="country">From: {production_countries[0] ? production_countries[0].name : ''}</p>
-            <p className="popularity">Popularity: {popularity}</p>
-            <p className="votes">{vote_count} votes</p>
-            <p className="nsfw">{adult ? 'NSFW' : ''}</p>
+            <img src={'https://image.tmdb.org/t/p/original'+data.poster_path} alt="Movie Poster"/>
+            <p className="status">Status: {data.status}</p>
+            <p className="overview">Overview: {data.overview}</p>
+            { data.production_countries.length ? <p className="country">From: {data.production_countries.map((country) => { return country.name }).join(', ')}</p> : '' }
+            { data.revenue ? <p className="revenue">{new Intl.NumberFormat('EN', { style: 'currency', currency: 'USD' }).format(Number(data.revenue))}</p> : '' }
+            <p className="popularity">Popularity: {data.popularity}</p>
+            { data.vote_count ? <p className="votes">{data.vote_count} votes {data.vote_average} average</p> : '' }
+            { data.adult ? <p className="nsfw">NSFW</p> : ''}
+            { data.production_companies.length ? <p className="companies">Companies: {data.production_companies.map((company) => { return company.name }).join(', ')}</p> : '' }
           </div>
         </>
       )
