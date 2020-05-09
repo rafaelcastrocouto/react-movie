@@ -20,7 +20,7 @@ function Popular() {
       const res = await fetch(url);
       const newdata = await res.json();
 
-      //console.log('Popular', newdata)
+      console.log('Popular', newdata)
 
       setLoading(false);
       setData(newdata);
