@@ -17,7 +17,7 @@ function Search () {
 
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  
+
   useEffect(()=> {
     async function fetchSearch () {
 
@@ -49,7 +49,7 @@ function Search () {
     if (data.results && data.results.length) {
       return data.results.map(Thumb);
     } else {
-      return 'No results for "' + query.split('=')[1] + '"';
+      return 'No results for "' + query.split('=')[1] + '" page ' + page;
     }
   }
 

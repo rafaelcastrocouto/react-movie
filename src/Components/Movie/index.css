@@ -9,7 +9,7 @@
   margin: 2em;
   border: 1px solid #445;
   min-height: 34vw;
-  background-color: #1d1f26;
+  background-color: rgba(29, 31, 38, 0.95);
 }
 .movie h1 {
   color: #0ebeff;

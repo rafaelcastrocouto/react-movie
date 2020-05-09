@@ -14,6 +14,8 @@ const SearchBar = function () {
     var query = new URLSearchParams(event.target.value).toString().slice(0, -1);
     var path = loc.pathname.split('/');
     var page = path[path.length-1] || 1;
+    if (path[1] !== 'search') page = 1;
+    if (page < 1) page = 1;
     history.push('/search/'+page+'?query='+query);
   }
 

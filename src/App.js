@@ -5,6 +5,7 @@ import SearchBar from './Components/SearchBar';
 import { BrowserRouter, Link } from 'react-router-dom';
 
 function App() {
+    
   return (
     <div className="App">
       <BrowserRouter>

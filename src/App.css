@@ -11,6 +11,7 @@
   color: white;
   background-image: linear-gradient(to bottom, #131417, rgba(0, 0, 0, 0)), var(--bkg);
   background-size: cover;
+  background-position: 50%;
 }
 
 h1, form {

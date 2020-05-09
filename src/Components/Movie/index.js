@@ -50,7 +50,7 @@ function Movie () {
         <>
           <h1 key={data.id}>{data.title}</h1>
           <span className="date">{data.release_date}</span>
-          <p className="tagline">{data.tagline}</p>
+          { data.tagline ? <p className="tagline">{data.tagline}</p> : ''}
           <div className="details">
             { data.poster_path ? <img src={'https://image.tmdb.org/t/p/original'+data.poster_path} alt="Movie Poster"/> : '' }
             <p className="status">Status: {data.status}</p>
