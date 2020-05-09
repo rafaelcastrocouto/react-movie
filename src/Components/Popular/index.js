@@ -4,12 +4,14 @@ import Thumb from './../Thumb';
 import Pagination from './../Pagination';
 import {useParams} from "react-router-dom";
 
-function Popular() {
+function Popular(props) {
 
   const page = useParams().page || 1;
 
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  
+  const valid = (page >= 1 && page <= 500);
   
   useEffect(()=> {
     async function fetchPopular () {
@@ -27,24 +29,29 @@ function Popular() {
 
     };
 
-    fetchPopular();
+    if (valid) fetchPopular();
 
-  }, [page]);
+  }, [valid, page]);
 
 
   function popularItem () {
-    if (data.results) {
-      return data.results.map(Thumb);
+    if (valid && data.results) {
+      if (props.size) return data.results.slice(props.size).map(Thumb);
+      else return data.results.map(Thumb);
+    } else {
+      return (
+        <p>No results for page {page}</p>
+      );
     }
   }
   
-  if (loading) return Loading();
+  if (loading && valid) return Loading();
   
   return (
     <> 
-      {Pagination('page', page, data.total_pages)}
+      { !props.size ? Pagination('page', page, data.total_pages || 1) : '' }
       <ul className='popular'>{popularItem.bind(this)()}</ul>
-      {Pagination('page', page, data.total_pages)}
+      { !props.size ? Pagination('page', page, data.total_pages || 1) : '' }
     </>
   );
   

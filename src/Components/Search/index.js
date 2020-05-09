@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import './index.css';
 import Loading from './../Loading';
 import Thumb from './../Thumb';
 import Pagination from './../Pagination';
-import {useParams, useLocation, useHistory} from "react-router-dom";
+import {useParams, useLocation} from "react-router-dom";
 
 function Search () {
-   
-  const history = useHistory();
 
   const page = useParams().page || 1;
   
@@ -18,12 +15,12 @@ function Search () {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
+  const valid = (query.length > 6 && page >= 1 && page <= 500);
+
   useEffect(()=> {
     async function fetchSearch () {
 
       const key = process.env.REACT_APP_API_KEY;
-      
-      if (query.length > 6) {
 
         const url = new URL('https://api.themoviedb.org/3/search/movie?api_key='+key+'&page='+page+'&'+query);
 
@@ -32,34 +29,31 @@ function Search () {
 
         //console.log('Search:', newdata);
 
-        if (page > newdata.total_pages) {
-          history.push('/search/'+newdata.total_pages+'?'+query);
-        } else {
-          setLoading(false);
-          setData(newdata);
-        }
-      }
+        setLoading(false);
+        setData(newdata);
     };
 
-    fetchSearch();
+    if (valid) fetchSearch();
 
-  }, [page, query, history]);
+  }, [valid, page, query]);
 
   function searchResults () {
-    if (data.results && data.results.length) {
+    if (valid && data.results && data.results.length && page <= data.total_pages) {
       return data.results.map(Thumb);
     } else {
-      return 'No results for "' + query.split('=')[1] + '" page ' + page;
+      return (
+        <p>No results for "{query.split('=')[1]}" page {page}</p>
+      );
     }
   }
 
-  if (loading) return Loading();
+  if (loading && valid) return Loading();
 
   return (
     <>
-      {Pagination('search', page, data.total_pages, query)}
+      {Pagination('search', page, data.total_pages || 1, query)}
       <ul className='searchResults'>{searchResults.bind(this)()}</ul>
-      {Pagination('search', page, data.total_pages, query)}
+      {Pagination('search', page, data.total_pages || 1, query)}
     </>
   );
 
