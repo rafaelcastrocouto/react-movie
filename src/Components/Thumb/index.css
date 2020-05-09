@@ -38,6 +38,8 @@
 }
 
 .thumb .poster {
+  background-color: #446;
+  width: 133px;
   height: 200px;
   float: right;
   margin-left: 0.6em;
