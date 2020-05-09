@@ -1,3 +1,7 @@
+.searchBar {
+  margin-top: 1em;
+  vertical-align: bottom;
+}
 .searchBar input {
   border: none;
   padding: 0.8em;
@@ -7,4 +11,8 @@
 .searchBar input[type=submit] {
   padding: 0.7em;
   border-radius: 50%;
+  transition: background-color 0.4s;
+}
+.searchBar input[type=submit]:hover {
+  background-color: #bbf;
 }

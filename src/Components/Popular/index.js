@@ -36,19 +36,14 @@ function Popular(props) {
 
   function popularItem () {
     if (data.results) {
-      return data.results.map(({ id, title, release_date, vote_count, popularity, backdrop_path }) => (
-        <li key={id}>
-          {Thumb(id, title, release_date, vote_count, popularity)}
-        </li>
-      ))
+      return data.results.map(Thumb);
     }
   }
   
   if (loading) return Loading();
   
   return (
-    <>
-      <h2>Popular</h2>  
+    <> 
       {Pagination('page', page, data.total_pages)}
       <ul className='popular'>{popularItem.bind(this)()}</ul>
       {Pagination('page', page, data.total_pages)}

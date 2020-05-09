@@ -41,11 +41,7 @@ function Search () {
 
   function searchResults () {
     if (data.results && data.results.length) {
-      return data.results.map(({ id, title, release_date, vote_count, popularity, backdrop_path }) => (
-        <li key={id}>
-          {Thumb(id, title, release_date, vote_count, popularity)}
-        </li>
-      ))
+      return data.results.map(Thumb);
     } else {
       return 'No results';
     }

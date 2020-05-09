@@ -3,9 +3,9 @@ import Movie from './../../Components/Movie';
 
 export default () => {
   return (
-    <div className="movie">
-      <p>Movie Description</p>
+    <>
+      <h2>Movie Description</h2>
       <Movie />
-    </div>
+    </>
   );
 }

@@ -1,6 +1,7 @@
 .App {
+  padding: 1em;
   text-align: center;
-  background-color: #282c34;
+  background-color: #131417;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -15,10 +16,21 @@ h1, form {
   display: inline-block;
 }
 
-a, a:visited, a:active {
-  color: #61dafb;
+h2 {
+  margin-bottom: 0.5em;
+}
+
+a, a:visited {
+  color: #0ebeff;
+  transition: color 0.4s;
+}
+
+a:hover, a:active {
+  color: #9ee5ff;
 }
 
 ul {
+  margin: 0;
+  padding: 0;
   list-style: none;
 }
