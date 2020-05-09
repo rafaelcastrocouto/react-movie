@@ -13,9 +13,10 @@ A web app that helps users explore the The Movie Database API.
 1. Popular List
 1. Movie Description
 1. Search Results
-1. Search bar
+1. Search Bar
 1. Pagination Handler
-1. Thumbnails for lists
+1. Movie Thumbnails
+1. Loading animation
 
 Required environment variable: `REACT_APP_API_KEY` with an API key for [TMDb](https://developers.themoviedb.org/3/getting-started/authentication)
 
