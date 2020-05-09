@@ -10,8 +10,6 @@ function Popular() {
 
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-
-  //console.log('page',page)
   
   useEffect(()=> {
     async function fetchPopular () {

@@ -3,9 +3,11 @@ import './index.css';
 import Loading from './../Loading';
 import Thumb from './../Thumb';
 import Pagination from './../Pagination';
-import {useParams, useLocation} from "react-router-dom";
+import {useParams, useLocation, useHistory} from "react-router-dom";
 
 function Search () {
+   
+  const history = useHistory();
 
   const page = useParams().page || 1;
   
@@ -28,22 +30,26 @@ function Search () {
         const res = await fetch(url);
         const newdata = await res.json();
 
-        //console.log('Search:', data);
+        //console.log('Search:', newdata);
 
-        setLoading(false);
-        setData(newdata);
+        if (page > newdata.total_pages) {
+          history.push('/search/'+newdata.total_pages+'?'+query);
+        } else {
+          setLoading(false);
+          setData(newdata);
+        }
       }
     };
 
     fetchSearch();
 
-  }, [page, query]);
+  }, [page, query, history]);
 
   function searchResults () {
     if (data.results && data.results.length) {
       return data.results.map(Thumb);
     } else {
-      return 'No results';
+      return 'No results for "' + query.split('=')[1] + '"';
     }
   }
 
