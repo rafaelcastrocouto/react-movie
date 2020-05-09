@@ -1,7 +1,7 @@
 .thumb {
   margin: 0.6em;
   display: inline-block;
-  width: 200px;
+  width: 320px;
   height: 200px;
   border: 1px solid #445;
   overflow: hidden;
@@ -22,7 +22,12 @@
   vertical-align: middle; 
   display: table-cell; 
 }
-
+.thumb h3 {
+  margin: 0.8em 0 1em;
+  max-height: 2.6em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .thumb .date {
   font-size: 60%;
 }
@@ -30,4 +35,10 @@
 .thumb .popularity,
 .thumb .votes {
   font-size: 80%;
+}
+
+.thumb .poster {
+  height: 200px;
+  float: right;
+  margin-left: 0.6em;
 }

@@ -4,7 +4,7 @@ import Thumb from './../Thumb';
 import Pagination from './../Pagination';
 import {useParams} from "react-router-dom";
 
-function Popular(props) {
+function Popular() {
 
   const page = useParams().page || 1;
 
